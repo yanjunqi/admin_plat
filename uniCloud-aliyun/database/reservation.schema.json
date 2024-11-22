@@ -1,0 +1,66 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"date":{
+			"bsonType":"timestamp",
+			"title":"日期"
+		},
+		"sponsor":{
+			"title":"订餐人",
+			"bsonType": "string",
+			"description": "订餐发起人",
+			"trim": "both"
+			
+		},
+		"mobile": {
+		    "bsonType": "string",
+		    "description": "手机号码",
+		    "pattern": "^\\+?[0-9-]{3,20}$",
+		    "title": "手机号码",
+		    "trim": "both"
+		},
+		"user_id": {
+		    "bsonType": "string",
+		    "description": "订餐人的uid，参考 uni-id-users 表",
+		    "forceDefaultValue": {
+		    			"$env": "uid"
+		    }
+		},
+		"orderers_noon":{
+			"title":"午餐组员",
+			"bsonType": "string",
+			"description": "所有订餐者",
+			"trim": "both"
+		},
+		"ordererNum_noon":{
+			"title":"午餐订餐数",
+			"bsonType": "int",
+			"description":"订餐数",
+			"defaultValue":0
+		},
+		"orderers_night":{
+			"title":"晚餐组员",
+			"bsonType": "string",
+			"description": "所有订餐者",
+			"trim": "both"
+		},
+		"ordererNum_night":{
+			"title":"晚餐订餐数",
+			"bsonType": "int",
+			"description":"订餐数",
+			"defaultValue":0
+		}
+		
+	}
+}

@@ -1,0 +1,81 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": ["name","meal_type","taste"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"meal_type":{
+			"bsonType": "int",
+			"description": "菜品类型（0荤菜、1素菜、2汤类、3其他）",
+			"title": "类型",
+			"defaultValue": 0,
+			"enum": [
+						{
+							"text": "荤菜",
+							"value": 0
+						},
+						{
+							"text": "素菜",
+							"value": 1
+						},
+						{
+							"text": "汤类",
+							"value": 2
+						},
+                        {
+                            "text":"其他",
+                            "value": 3
+                        }
+					],
+			"componentForEdit":{
+				"name":"uni-data-checkbox"
+			}
+			
+			
+		},
+		"meal_typename":{
+			"bsonType": "string",
+			"defaultValue": "荤菜",
+			"parentKey": "name"
+		},
+		"name":{
+			"bsonType": "string",
+			"description": "菜品名",
+			"title":"名称",
+			"trim": "both"
+		},
+		"taste":{
+			"bsonType": "int",
+			"description": "口味（0家常、1微辣）",
+			"title": "类型",
+			"defaultValue": 0,
+			"enum": [
+						{
+							"text": "家常",
+							"value": 0
+						},
+						{
+							"text": "微辣",
+							"value": 1
+						}
+					],
+			"componentForEdit":{
+				"name":"uni-data-checkbox"
+			}
+		},
+		"details_pic":{
+			"bsonType": "file",
+			"title":"图片",
+			"fileMediaType":"image"
+		}
+		
+	}
+}

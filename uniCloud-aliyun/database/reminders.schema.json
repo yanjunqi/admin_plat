@@ -1,0 +1,57 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": ["Receiver","matters","amount","deadtime"],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"Receiver":{
+			"bsonType": "string",
+			"title": "责任人",
+			"trim": "both",
+
+			"validateFunction":"checkUsername"
+		},
+		"Receiver_id":{
+			"description": "责任人ID",
+			"bsonType": "string",
+			"title": "责任人ID",
+			"foreignKey": "uni-id-users._id"
+		},
+		"matters":{
+			"bsonType": "string",
+			"title": "事项",
+			"trim": "both"
+
+		},
+		"amount":{
+			"bsonType": "string",
+			"title": "金额",
+
+			"pattern": "^[1-9][0-9]*\\.{0,1}[0-9]{0,2}$"
+		},
+		"deadtime":{
+			"bsonType": "timestamp",
+			"title": "完成时间",
+
+			"componentForEdit":{
+			    "props": {
+			      "type": "date"
+			    }
+			}
+		},
+		"state":{
+			"bsonType": "bool",
+			"title": "状态",
+            "defaultValue":false
+		}
+		
+	}
+}

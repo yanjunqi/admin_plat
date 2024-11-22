@@ -1,0 +1,114 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": "doc.uid == auth.uid || 'GOVERNMENTCAR_EDIT' in auth.permission ||'GOVERNMENTCAR_EDIT2' in auth.permission",
+		"create": true,
+		"update": "doc.uid == auth.uid || 'GOVERNMENTCAR_EDIT' in auth.permission ||'GOVERNMENTCAR_EDIT2' in auth.permission",
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+        "uid":{
+              "bsonType": "string",
+              "description": "用户id，参考uni-id-users表",
+              "forceDefaultValue": {
+                "$env": "uid"
+              }
+        },
+		"reason":{
+			"bsonType": "string",
+			"title":"用车事由",
+			"trim": "both"
+		},
+		"department":{
+			"bsonType": "string",
+			"title":"申请部门",
+			"trim": "both"
+		},
+		"destination":{
+			"bsonType": "string",
+			"title":"目的地",
+			"trim": "both"
+		},
+		"passenger":{
+			"bsonType": "string",
+			"title":"乘车人",
+			"trim": "both"
+		},
+        "mobile": {
+            "bsonType": "string",
+            "description": "手机号码",
+            "pattern": "^\\+?[0-9-]{3,20}$",
+            "title": "手机号码",
+            "trim": "both"
+        },
+		"boarding_time":{
+			"bsonType": "timestamp",
+			"title": "用车时间"
+		},
+		"alighting_time":{
+			"bsonType": "timestamp",
+			"title": "预计返回时间"
+		},
+		"note":{
+			"bsonType": "string",
+			"title":"备注",
+            "defaultValue": "",
+			"trim": "both"
+		},
+		"driver":{
+			"bsonType": "string",
+			"title":"驾驶人",
+            "defaultValue": "",
+			"trim": "both",
+			"permission": {
+				"write": "'GOVERNMENTCAR_EDIT' in auth.permission"
+			}
+		},
+		"approver":{
+			"bsonType": "string",
+			"title":"审批人",
+		    "defaultValue": "",
+			"trim": "both",
+			"permission": {
+				"write": "'GOVERNMENTCAR_EDIT' in auth.permission"
+			}
+		},
+		"plate":{
+			"bsonType": "string",
+			"title":"车牌号",
+            "defaultValue": "",
+			"trim": "both",
+            "permission": {
+			"write": "'GOVERNMENTCAR_EDIT' in auth.permission"
+            }
+		},
+		"begin_mileage":{
+			"bsonType": "string",
+			"title":"起始里程"
+		},
+		"end_mileage":{
+			"bsonType": "string",
+			"title":"终点里程"
+		},
+        "beChanged":{
+            "bsonType": "bool",
+            "defaultValue":false,
+            "title": "是否修改"
+        },
+		"beApproved1":{
+		    "bsonType": "bool",
+		    "defaultValue":false,
+		    "title": "一级审批"
+		},
+		"beApproved2":{
+		    "bsonType": "bool",
+		    "defaultValue":false,
+		    "title": "二级审批"
+		}
+	}
+}

@@ -1,0 +1,56 @@
+{
+    "bsonType": "object",
+    "permission": {
+        "create": true,
+        "delete": true,
+        "read": true,
+        "update": true
+    },
+    "properties": {
+        "_id": {
+            "description": "ID，系统自动生成"
+        },
+        "create_time": {
+              "bsonType": "timestamp",
+              "title": "创建时间",
+              "forceDefaultValue": {
+                "$env": "now"
+              }
+        },
+        "type":{
+                "bsonType": "int",
+                "description": "消息类型",
+                "title": "消息类型",
+                "defaultValue": 0,
+                "enum": [
+                            {
+                                "text": "提醒",
+                                "value": 0
+                            },
+                            {
+                                "text": "保修",
+                                "value": 1
+                            },
+                            {
+                                "text": "用车",
+                                "value": 2
+                            }
+                        ]
+        		},
+        "content": {
+            "description": "内容",
+            "bsonType": "string"
+        },
+        "uid": {
+            "bsonType": "string",
+            "description": "用户ID",
+            "foreignKey": "uni-id-users._id"
+        },
+        "nickname": {
+            "bsonType": "string",
+            "description": "用户名",
+            "foreignKey": "uni-id-users.nickname"
+        }
+    },
+    "version": "0.0.1"
+}

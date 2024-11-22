@@ -1,0 +1,8 @@
+// 本文件中的json内容将在云函数【运行】时作为参数传给云函数。
+// 配置教程参考：https://uniapp.dcloud.net.cn/uniCloud/rundebug.html#runparam
+{
+    "type":"维修",
+    "eid":"6499b02ee766bb7691fc37d5",
+    "content": "9月26日的报修已处理",
+    "uid": "6491144ef43e6001c1c1bfb2"
+}

@@ -1,0 +1,51 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+        "user_id": {
+            "bsonType": "string",
+            "description": "评论者的uid，参考 uni-id-users 表",
+            "forceDefaultValue": {
+            			"$env": "uid"
+            }
+        },
+        "menu_id": {
+            "bsonType": "string",
+            "description": "菜谱名字",
+            "foreignKey": "menu._id"
+        },
+        "content": {
+            "bsonType": "string",
+            "description": "评论内容",
+            "title":"评论内容",
+            "trim":"both"
+        },
+        "rate":{
+            "bsonType": "int",
+            "description": "评分",
+            "title":"评分",
+            "componentForEdit":{
+                    "name":"uni-rate"
+                }
+        },
+        "date":{
+        	"bsonType":"timestamp",
+        	"title":"日期",
+            "componentForEdit":{
+                "props": {
+                  "type": "date"
+                }
+            }
+        }
+	}
+}

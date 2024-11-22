@@ -1,0 +1,109 @@
+{
+	"bsonType": "object",
+	"required": [],
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"uid": {
+			"bsonType": "string",
+			"description": "用户id，参考uni-id-users表",
+			"forceDefaultValue": {
+				"$env": "uid"
+			}
+		},
+		"overview": {
+			"bsonType": "string",
+			"title": "基本信息",
+			"trim": "both",
+			"permission": {
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+                "write": "doc.uid == auth.uid"
+			}
+		},
+		"details": {
+			"bsonType": "string",
+			"title": "损坏详情",
+			"trim": "both",
+			"permission": {
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+                "write": "doc.uid == auth.uid"
+			}
+		},
+		"details_pic": {
+			"bsonType": "array",
+			"arrayType": "file",
+			"multiple": true,
+			"title": "照片详情",
+			"fileMediaType": "image",
+			"permission": {
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+                "write": "doc.uid == auth.uid"
+			}
+		},
+		"repair_date": {
+			"bsonType": "timestamp",
+			"title": "报修时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			},
+			"permission": {
+				"write": false,
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission"
+			}
+		},
+		"applicant": {
+			"bsonType": "string",
+			"titile": "报修人",
+			"trim": "both",
+			"permission": {
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+                "write": "doc.uid == auth.uid"
+			}
+		},
+		"mobile": {
+			"bsonType": "string",
+			"description": "联系方式",
+			"pattern": "^\\+?[0-9-]{3,20}$",
+			"title": "联系方式",
+			"trim": "both",
+			"permission": {
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission",
+                "write": "doc.uid == auth.uid"
+			}
+		},
+		"state": {
+			"bsonType": "bool",
+			"title": "是否完成",
+			"defaultValue": false,
+			"permission": {
+				"write": "'REPAIR_EDIT' in auth.permission",
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission"
+			}
+		},
+		"review_info": {
+			"bsonType": "string",
+			"title": "科室审核",
+			"trim": "both",
+			"permission": {
+				"write": "'REPAIR_EDIT' in auth.permission",
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission"
+			}
+		},
+		"result": {
+			"bsonType": "string",
+			"title": "维修结果",
+			"trim": "both",
+			"permission": {
+				"write": "'REPAIR_EDIT' in auth.permission",
+				"read": "doc.uid == auth.uid || 'REPAIR_EDIT' in auth.permission"
+			}
+		}
+	}
+}

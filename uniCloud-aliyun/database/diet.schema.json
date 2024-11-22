@@ -1,0 +1,134 @@
+// 文档教程: https://uniapp.dcloud.net.cn/uniCloud/schema
+{
+	"bsonType": "object",
+	"permission": {
+		"read": true,
+		"create": true,
+		"update": true,
+		"delete": true
+	},
+	"properties": {
+		"_id": {
+			"description": "ID，系统自动生成"
+		},
+		"create_time": {
+		      "bsonType": "timestamp",
+		      "title": "创建时间",
+		      "forceDefaultValue": {
+		        "$env": "now"
+		      }
+		},
+		"menu1":{
+			"bsonType":"string",
+			"title":"午餐",
+			"foreignKey": "menu.name",
+			"enum": {
+			        "collection": "menu",
+			        "orderby": "first_letter asc",
+			        "field": "name as value, name as text"
+			}
+		},
+        "menu2":{
+        	"bsonType":"string",
+        	"title":"午餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+        "menu3":{
+        	"bsonType":"string",
+        	"title":"午餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+        "menu4":{
+        	"bsonType":"string",
+        	"title":"午餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+        "menu5":{
+        	"bsonType":"string",
+        	"title":"晚餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+        "menu6":{
+        	"bsonType":"string",
+        	"title":"晚餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+        "menu7":{
+        	"bsonType":"string",
+        	"title":"晚餐",
+        	"foreignKey": "menu.name",
+        	"enum": {
+        	        "collection": "menu",
+        	        "orderby": "first_letter asc",
+        	        "field": "name as value, name as text"
+        	}
+        },
+		"date":{
+			"bsonType": "int",
+			"description": "星期",
+			"title": "星期",
+			"defaultValue": 0,
+			"enum": [
+						{
+							"text": "周一",
+							"value": 0
+						},
+						{
+							"text": "周二",
+							"value": 1
+						},
+						{
+							"text": "周三",
+							"value": 2
+						},
+                        {
+                            "text":"周四",
+                            "value": 3
+                        },
+                        {
+                            "text":"周五",
+                            "value": 4
+                        },
+                        {
+                            "text":"周六",
+                            "value": 5
+                        },
+                        {
+                            "text":"周日",
+                            "value": 6
+                        }
+					],
+			"componentForEdit":{
+				"name":"uni-data-checkbox"
+			}
+			
+			
+		}
+		}
+        
+}
