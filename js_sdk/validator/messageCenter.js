@@ -14,7 +14,7 @@ const validator = {
             "value": 0
           },
           {
-            "text": "保修",
+            "text": "报修",
             "value": 1
           },
           {
@@ -47,7 +47,7 @@ const validator = {
 const enumConverter = {
   "type_valuetotext": {
     "0": "提醒",
-    "1": "保修",
+    "1": "报修",
     "2": "用车"
   }
 }

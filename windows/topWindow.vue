@@ -172,20 +172,21 @@
 				})
 			},
 			changeLanguage(e) {
-				let index = typeof e === 'object' ? e.detail.value : e
-				if (!index || index < 0) index = 0;
-				const lang = this.langs[index].lang || 'zh-Hans'
-				const platform = uni.getSystemInfoSync().platform
-				if (platform === 'android') {
-					uni.showToast({
-						icon: 'error',
-						title: '暂不支持',
-						duration: 2000
-					})
-					return
-				}
+				// let index = typeof e === 'object' ? e.detail.value : e
+				// if (!index || index < 0) index = 0;
+				// const lang = this.langs[index].lang || 'zh-Hans'
+				// const platform = uni.getSystemInfoSync().platform
+				// if (platform === 'android') {
+				// 	uni.showToast({
+				// 		icon: 'error',
+				// 		title: '暂不支持',
+				// 		duration: 2000
+				// 	})
+				// 	return
+				// }
+				const lang = 'zh-Hans'
 				this.$i18n.locale = lang
-				this.langIndex = index;
+				this.langIndex = 0;
 				uni.setLocale(lang)
 			},
 			linkTo() {

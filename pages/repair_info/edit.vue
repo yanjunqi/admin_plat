@@ -10,7 +10,7 @@
       <uni-forms-item name="details_pic" label="照片详情">
         <uni-file-picker disabled file-mediatype="image" return-type="array" v-model="formData.details_pic"></uni-file-picker>
       </uni-forms-item>
-      <uni-forms-item name="applicant" label="">
+      <uni-forms-item name="applicant" label="报修人">
         <uni-easyinput disabled v-model="formData.applicant" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="mobile" label="手机号码">
@@ -68,14 +68,16 @@
         "state": false,
         "review_info": "",
         "result": "",
-        "repair_date": null
+        "repair_date": null,
+		"uid":""
       }
       return {
         formData,
         formOptions: {},
         rules: {
           ...getValidator(Object.keys(formData))
-        }
+        },
+		name:""
       }
     },
     onLoad(e) {
@@ -114,8 +116,18 @@
           uni.showToast({
             title: '修改成功'
           })
+		  console.log("submitForm")
           this.getOpenerEventChannel().emit('refreshData')
-          setTimeout(() => uni.navigateBack(), 500)
+		  console.log(this.name)
+			const db = uniCloud.database() //代码块为cdb
+			let formData = {
+							"type":1,
+							"content": "报修已审核",
+							"uid": this.formData.uid,
+							"nickname":this.name
+						  }
+			db.collection('messageCenter').add(formData)
+          // setTimeout(() => uni.navigateBack(), 500)
         }).catch((err) => {
           uni.showModal({
             content: err.message || '请求服务失败',
@@ -132,12 +144,24 @@
         uni.showLoading({
           mask: true
         })
-        db.collection(dbCollectionName).doc(id).field("overview,details,details_pic,applicant,mobile,state,review_info,result,repair_date").get().then((res) => {
+        db.collection(dbCollectionName).doc(id).field("overview,details,details_pic,applicant,mobile,state,review_info,result,repair_date,uid").get().then((res) => {
           const data = res.result.data[0]
           if (data) {
             this.formData = data
-            
           }
+		  db.collection("uni-id-users").where(`_id == "${this.formData.uid}"`).field("nickname").get().then((res) => {
+		            const data = res.result.data[0]
+		            if (data) {
+		              this.name=data.nickname
+		            }
+		          }).catch((err) => {
+		            uni.showModal({
+		              content: err.message || '请求服务失败',
+		              showCancel: false
+		            })
+		          }).finally(() => {
+		            uni.hideLoading()
+		          })
         }).catch((err) => {
           uni.showModal({
             content: err.message || '请求服务失败',
