@@ -116,9 +116,7 @@
           uni.showToast({
             title: '修改成功'
           })
-		  console.log("submitForm")
           this.getOpenerEventChannel().emit('refreshData')
-		  console.log(this.name)
 			const db = uniCloud.database() //代码块为cdb
 			let formData = {
 							"type":1,
@@ -127,7 +125,7 @@
 							"nickname":this.name
 						  }
 			db.collection('messageCenter').add(formData)
-          // setTimeout(() => uni.navigateBack(), 500)
+          setTimeout(() => uni.navigateBack(), 500)
         }).catch((err) => {
           uni.showModal({
             content: err.message || '请求服务失败',

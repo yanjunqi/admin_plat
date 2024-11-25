@@ -92,14 +92,16 @@
         "begin_mileage": "",
         "end_mileage": "",
         "beApproved1": false,
-        "beApproved2": false
+        "beApproved2": false,
+		"uid":""
       }
       return {
         formData,
         formOptions: {},
         rules: {
           ...getValidator(Object.keys(formData))
-        }
+        },
+		name:""
       }
     },
     onLoad(e) {
@@ -138,6 +140,14 @@
           uni.showToast({
             title: '修改成功'
           })
+		  const db = uniCloud.database() //代码块为cdb
+		  let formData = {
+		  				"type":2,
+		  				"content": "用车已审核",
+		  				"uid": this.formData.uid,
+		  				"nickname":this.name
+		  			  }
+		  db.collection('messageCenter').add(formData)
           this.getOpenerEventChannel().emit('refreshData')
           setTimeout(() => uni.navigateBack(), 500)
         }).catch((err) => {
@@ -156,12 +166,30 @@
         uni.showLoading({
           mask: true
         })
-        db.collection(dbCollectionName).doc(id).field("reason,department,destination,passenger,mobile,boarding_time,alighting_time,note,driver,approver,plate,begin_mileage,end_mileage,beApproved1,beApproved2").get().then((res) => {
+        db.collection(dbCollectionName).doc(id).field("reason,department,destination,passenger,mobile,boarding_time,alighting_time,note,driver,approver,plate,begin_mileage,end_mileage,beApproved1,beApproved2,uid").get().then((res) => {
           const data = res.result.data[0]
           if (data) {
             this.formData = data
             
           }
+		  db.collection("uni-id-users").where(`_id == "${this.formData.uid}"`).field("nickname").get().then((res) => {
+		            const data = res.result.data[0]
+					console.log("this.formData.uid")
+					console.log(this.formData.uid)
+		            if (data) {
+		              this.name=data.nickname
+		            }
+					else{
+						console.log("fail")
+					}
+		          }).catch((err) => {
+		            uni.showModal({
+		              content: err.message || '请求服务失败',
+		              showCancel: false
+		            })
+		          }).finally(() => {
+		            uni.hideLoading()
+		          })
         }).catch((err) => {
           uni.showModal({
             content: err.message || '请求服务失败',
