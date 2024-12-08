@@ -21,6 +21,7 @@
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
+			  <uni-th align="center" filter-type="select" :filter-data="options.filterData.date_localdata" @filter-change="filterChange($event, 'date')">星期</uni-th>
             <uni-th align="center">午餐</uni-th>
             <uni-th align="center">午餐</uni-th>
             <uni-th align="center">午餐</uni-th>
@@ -28,10 +29,11 @@
             <uni-th align="center">晚餐</uni-th>
             <uni-th align="center">晚餐</uni-th>
             <uni-th align="center">晚餐</uni-th>
-            <uni-th align="center" filter-type="select" :filter-data="options.filterData.date_localdata" @filter-change="filterChange($event, 'date')">星期</uni-th>
+            
             <uni-th align="center">操作</uni-th>
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
+			<uni-td align="center">{{options.date_valuetotext[item.date]}}</uni-td>
             <uni-td align="center">{{item.menu1}}</uni-td>
             <uni-td align="center">{{item.menu2}}</uni-td>
             <uni-td align="center">{{item.menu3}}</uni-td>
@@ -39,7 +41,7 @@
             <uni-td align="center">{{item.menu5}}</uni-td>
             <uni-td align="center">{{item.menu6}}</uni-td>
             <uni-td align="center">{{item.menu7}}</uni-td>
-            <uni-td align="center">{{options.date_valuetotext[item.date]}}</uni-td>
+            
             <uni-td align="center">
               <view class="uni-group">
                 <button @click="navigateTo('./edit?id='+item._id, false)" class="uni-button" size="mini" type="primary">修改</button>

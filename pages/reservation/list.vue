@@ -16,7 +16,7 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="date,sponsor,mobile,orderers_noon,ordererNum_noon,orderers_night,ordererNum_night" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="sponsor,mobile,orderers_noon,ordererNum_noon,orderers_night,ordererNum_night" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
@@ -28,24 +28,24 @@
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'ordererNum_noon')" sortable @sort-change="sortChange($event, 'ordererNum_noon')">午餐订餐数</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'orderers_night')" sortable @sort-change="sortChange($event, 'orderers_night')">晚餐组员</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'ordererNum_night')" sortable @sort-change="sortChange($event, 'ordererNum_night')">晚餐订餐数</uni-th>
-            <uni-th align="center">操作</uni-th>
+<!--            <uni-th align="center">操作</uni-th> -->
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
-            <uni-td align="center">
+<!--            <uni-td align="center">
               <uni-dateformat :threshold="[0, 0]" :date="item.date"></uni-dateformat>
-            </uni-td>
+            </uni-td> -->
             <uni-td align="center">{{item.sponsor}}</uni-td>
             <uni-td align="center">{{item.mobile}}</uni-td>
             <uni-td align="center">{{item.orderers_noon}}</uni-td>
             <uni-td align="center">{{item.ordererNum_noon}}</uni-td>
             <uni-td align="center">{{item.orderers_night}}</uni-td>
             <uni-td align="center">{{item.ordererNum_night}}</uni-td>
-            <uni-td align="center">
+<!--            <uni-td align="center">
               <view class="uni-group">
                 <button @click="navigateTo('./edit?id='+item._id, false)" class="uni-button" size="mini" type="primary">修改</button>
                 <button @click="confirmDelete(item._id)" class="uni-button" size="mini" type="warn">删除</button>
               </view>
-            </uni-td>
+            </uni-td> -->
           </uni-tr>
         </uni-table>
         <view class="uni-pagination-box">
