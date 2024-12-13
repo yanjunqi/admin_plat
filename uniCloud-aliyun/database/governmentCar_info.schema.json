@@ -19,6 +19,13 @@
                 "$env": "uid"
               }
         },
+        "create_time": {
+              "bsonType": "timestamp",
+              "title": "创建时间",
+              "forceDefaultValue": {
+                "$env": "now"
+              }
+        },
 		"reason":{
 			"bsonType": "string",
 			"title":"用车事由",
@@ -103,12 +110,18 @@
 		"beApproved1":{
 		    "bsonType": "bool",
 		    "defaultValue":false,
-		    "title": "一级审批"
+		    "title": "一级审批",
+            "permission": {
+            "write": "'GOVERNMENTCAR_EDIT' in auth.permission"
+            }
 		},
 		"beApproved2":{
 		    "bsonType": "bool",
 		    "defaultValue":false,
-		    "title": "二级审批"
+		    "title": "二级审批",
+            "permission": {
+            "write": "'GOVERNMENTCAR_EDIT2' in auth.permission"
+            }
 		}
 	}
 }

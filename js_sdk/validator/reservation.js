@@ -2,15 +2,6 @@
 
 
 const validator = {
-  "date": {
-    "rules": [
-      {
-        "format": "timestamp"
-      }
-    ],
-    "title": "日期",
-    "label": "日期"
-  },
   "sponsor": {
     "rules": [
       {

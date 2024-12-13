@@ -58,7 +58,7 @@
 			"tagManager": "标签管理",
 			"publish": "发布页管理",
 			"version": "版本管理",
-			"sendSMS": "群发短信"
+			"sendSMS": "群发消息"
 		},
 		"empty": "没有更多数据",
 		"piecePerPage": "条/页"

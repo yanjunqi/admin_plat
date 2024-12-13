@@ -6,9 +6,9 @@
         <view class="uni-sub-title"></view>
       </view>
       <view class="uni-group">
-        <input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="请输入搜索内容" />
+        <input class="uni-search" type="text" v-model="query" @confirm="search" placeholder="支持手机号检索" />
         <button class="uni-button" type="default" size="mini" @click="search">搜索</button>
-        <button class="uni-button" type="default" size="mini" @click="navigateTo('./add')">新增</button>
+        <!-- <button class="uni-button" type="default" size="mini" @click="navigateTo('./add')">新增</button> -->
         <button class="uni-button" type="default" size="mini" :disabled="!selectedIndexs.length" @click="delTable">批量删除</button>
         <download-excel class="hide-on-phone" :fields="exportExcel.fields" :data="exportExcelData" :type="exportExcel.type" :name="exportExcel.filename">
           <button class="uni-button" type="primary" size="mini">导出 Excel</button>
@@ -16,7 +16,7 @@
       </view>
     </view>
     <view class="uni-container">
-      <unicloud-db ref="udb" :collection="collectionList" field="reason,department,destination,passenger,mobile,boarding_time,alighting_time,note,driver,approver,plate,begin_mileage,end_mileage,beApproved1,beApproved2" :where="where" page-data="replace"
+      <unicloud-db ref="udb" :collection="collectionList" field="reason,department,destination,passenger,mobile,boarding_time,alighting_time,note,driver,approver,plate,begin_mileage,end_mileage,beChanged,beApproved1,beApproved2,create_time,create_time" :where="where" page-data="replace"
         :orderby="orderby" :getcount="true" :page-size="options.pageSize" :page-current="options.pageCurrent"
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
@@ -79,8 +79,8 @@
 
   const db = uniCloud.database()
   // 表查询配置
-  const dbOrderBy = '' // 排序字段
-  const dbSearchFields = [] // 模糊搜索字段，支持模糊搜索的字段列表。联表查询格式: 主表字段名.副表字段名，例如用户表关联角色表 role.role_name
+  const dbOrderBy = 'create_time desc' // 排序字段
+  const dbSearchFields = ["mobile"] // 模糊搜索字段，支持模糊搜索的字段列表。联表查询格式: 主表字段名.副表字段名，例如用户表关联角色表 role.role_name
   // 分页配置
   const pageSize = 20
   const pageCurrent = 1
@@ -114,13 +114,22 @@
           "type": "xls",
           "fields": {
             "用车事由": "reason",
+            "申请部门": "department",
             "目的地": "destination",
             "乘车人": "passenger",
             "手机号码": "mobile",
             "用车时间": "boarding_time",
             "预计返回时间": "alighting_time",
-            "备注": "reason",
-            "派车信息":"info"
+            "备注": "note",
+            "驾驶人": "driver",
+            "审批人": "approver",
+            "车牌号": "plate",
+            "起始里程": "begin_mileage",
+            "终点里程": "end_mileage",
+            "是否修改": "beChanged",
+            "一级审批": "beApproved1",
+            "二级审批": "beApproved2",
+            "创建时间": "create_time"
           }
         },
         exportExcelData: []

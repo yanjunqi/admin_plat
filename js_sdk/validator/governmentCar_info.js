@@ -26,8 +26,8 @@ const validator = {
         "format": "string"
       }
     ],
-    "title": "途径地点",
-    "label": "途径地点"
+    "title": "目的地",
+    "label": "目的地"
   },
   "passenger": {
     "rules": [
@@ -56,8 +56,8 @@ const validator = {
         "format": "timestamp"
       }
     ],
-    "title": "用车开始时间",
-    "label": "用车开始时间"
+    "title": "用车时间",
+    "label": "用车时间"
   },
   "alighting_time": {
     "rules": [
@@ -65,8 +65,8 @@ const validator = {
         "format": "timestamp"
       }
     ],
-    "title": "用车结束时间",
-    "label": "用车结束时间"
+    "title": "预计返回时间",
+    "label": "预计返回时间"
   },
   "note": {
     "rules": [
@@ -126,6 +126,16 @@ const validator = {
     "title": "终点里程",
     "label": "终点里程"
   },
+  "beChanged": {
+    "rules": [
+      {
+        "format": "bool"
+      }
+    ],
+    "title": "是否修改",
+    "defaultValue": false,
+    "label": "是否修改"
+  },
   "beApproved1": {
     "rules": [
       {
@@ -145,6 +155,15 @@ const validator = {
     "title": "二级审批",
     "defaultValue": false,
     "label": "二级审批"
+  },
+  "create_time": {
+    "rules": [
+      {
+        "format": "timestamp"
+      }
+    ],
+    "title": "创建时间",
+    "label": "创建时间"
   }
 }
 

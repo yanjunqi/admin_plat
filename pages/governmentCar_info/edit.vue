@@ -2,49 +2,49 @@
   <view class="uni-container">
     <uni-forms ref="form" :model="formData" validateTrigger="bind">
       <uni-forms-item name="reason" label="用车事由">
-        <uni-easyinput v-model="formData.reason" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.reason" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="department" label="申请部门">
-        <uni-easyinput v-model="formData.department" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.department" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="destination" label="途径地点">
-        <uni-easyinput v-model="formData.destination" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.destination" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="passenger" label="乘车人">
-        <uni-easyinput v-model="formData.passenger" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.passenger" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="mobile" label="手机号码">
-        <uni-easyinput placeholder="手机号码" v-model="formData.mobile" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" placeholder="手机号码" v-model="formData.mobile" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="boarding_time" label="用车开始时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.boarding_time"></uni-datetime-picker>
+        <uni-datetime-picker :disabled="true" return-type="timestamp" v-model="formData.boarding_time"></uni-datetime-picker>
       </uni-forms-item>
       <uni-forms-item name="alighting_time" label="用车结束时间">
-        <uni-datetime-picker return-type="timestamp" v-model="formData.alighting_time"></uni-datetime-picker>
+        <uni-datetime-picker :disabled="true" return-type="timestamp" v-model="formData.alighting_time"></uni-datetime-picker>
       </uni-forms-item>
       <uni-forms-item name="note" label="备注">
-        <uni-easyinput v-model="formData.note" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.note" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="driver" label="驾驶人">
-        <uni-easyinput v-model="formData.driver" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="!uniIDHasPermission('GOVERNMENTCAR_EDIT')" v-model="formData.driver" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="approver" label="审批人">
-        <uni-easyinput v-model="formData.approver" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="!uniIDHasPermission('GOVERNMENTCAR_EDIT')" v-model="formData.approver" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="plate" label="车牌号">
-        <uni-easyinput v-model="formData.plate" trim="both"></uni-easyinput>
+        <uni-easyinput :disabled="!uniIDHasPermission('GOVERNMENTCAR_EDIT')" v-model="formData.plate" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="begin_mileage" label="起始里程">
-        <uni-easyinput v-model="formData.begin_mileage"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.begin_mileage"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="end_mileage" label="终点里程">
-        <uni-easyinput v-model="formData.end_mileage"></uni-easyinput>
+        <uni-easyinput :disabled="true" v-model="formData.end_mileage"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="beApproved1" label="一级审批">
-        <switch @change="binddata('beApproved1', $event.detail.value)" :checked="formData.beApproved1"></switch>
+        <switch :disabled="!uniIDHasPermission('GOVERNMENTCAR_EDIT')"   @change="binddata('beApproved1', $event.detail.value)" :checked="formData.beApproved1"></switch>
       </uni-forms-item>
       <uni-forms-item name="beApproved2" label="二级审批">
-        <switch @change="binddata('beApproved2', $event.detail.value)" :checked="formData.beApproved2"></switch>
+        <switch :disabled="!uniIDHasPermission('GOVERNMENTCAR_EDIT2')" @change="binddata('beApproved2', $event.detail.value)" :checked="formData.beApproved2"></switch>
       </uni-forms-item>
       <view class="uni-button-group">
         <button type="primary" class="uni-button" style="width: 100px;" @click="submit">提交</button>
@@ -136,6 +136,21 @@
        */
       submitForm(value) {
         // 使用 clientDB 提交数据
+        if(this.uniIDHasPermission('GOVERNMENTCAR_EDIT')) 
+        {
+            console.log("gedit1")
+            delete value.beApproved2
+        }
+        if(this.uniIDHasPermission('GOVERNMENTCAR_EDIT2'))
+        {
+            console.log("gedit2")
+            delete value.beApproved1
+            delete value.driver
+            delete value.approver
+            delete value.plate
+        }
+        console.log(this.uniIDhasRole)
+        console.log(value)
         return db.collection(dbCollectionName).doc(this.formDataId).update(value).then((res) => {
           uni.showToast({
             title: '修改成功'
@@ -151,6 +166,7 @@
           this.getOpenerEventChannel().emit('refreshData')
           setTimeout(() => uni.navigateBack(), 500)
         }).catch((err) => {
+            console.log("submitForm fail")
           uni.showModal({
             content: err.message || '请求服务失败',
             showCancel: false

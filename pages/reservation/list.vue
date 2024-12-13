@@ -21,19 +21,15 @@
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
-            <!-- <uni-th align="center" filter-type="timestamp" @filter-change="filterChange($event, 'date')" sortable @sort-change="sortChange($event, 'date')">日期</uni-th> -->
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'sponsor')" sortable @sort-change="sortChange($event, 'sponsor')">订餐人</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'mobile')" sortable @sort-change="sortChange($event, 'mobile')">手机号码</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'orderers_noon')" sortable @sort-change="sortChange($event, 'orderers_noon')">午餐组员</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'ordererNum_noon')" sortable @sort-change="sortChange($event, 'ordererNum_noon')">午餐订餐数</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'orderers_night')" sortable @sort-change="sortChange($event, 'orderers_night')">晚餐组员</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'ordererNum_night')" sortable @sort-change="sortChange($event, 'ordererNum_night')">晚餐订餐数</uni-th>
-<!--            <uni-th align="center">操作</uni-th> -->
+            <!-- <uni-th align="center">操作</uni-th> -->
           </uni-tr>
           <uni-tr v-for="(item,index) in data" :key="index">
-<!--            <uni-td align="center">
-              <uni-dateformat :threshold="[0, 0]" :date="item.date"></uni-dateformat>
-            </uni-td> -->
             <uni-td align="center">{{item.sponsor}}</uni-td>
             <uni-td align="center">{{item.mobile}}</uni-td>
             <uni-td align="center">{{item.orderers_noon}}</uni-td>
@@ -58,9 +54,6 @@
 
 <script>
   import { enumConverter, filterToWhere } from '../../js_sdk/validator/reservation.js';
-
-
-
 
   const db = uniCloud.database()
   // 表查询配置
@@ -98,7 +91,6 @@
           "filename": "reservation.xls",
           "type": "xls",
           "fields": {
-            "日期": "date",
             "订餐人": "sponsor",
             "手机号码": "mobile",
             "午餐组员": "orderers_noon",

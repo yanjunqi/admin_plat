@@ -4,7 +4,7 @@
 			<uni-stat-breadcrumb class="uni-stat-breadcrumb-on-phone" />
 			<view class="uni-group">
 				<input class="uni-search" type="text" v-model="query" @confirm="search"
-					:placeholder="$t('common.placeholder.query')" />
+					placeholder="支持昵称,手机号检索" />
 				<button class="uni-button hide-on-phone" type="default" size="mini"
 					@click="search">{{$t('common.button.search')}}</button>
 				<button class="uni-button" type="primary" size="mini"
@@ -30,45 +30,45 @@
 				<uni-table ref="table" :loading="loading" :emptyText="error.message || $t('common.empty')" border stripe
 					type="selection" @selection-change="selectionChange">
 					<uni-tr>
-						<uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'username')"
-							sortable @sort-change="sortChange($event, 'username')">用户名</uni-th>
+<!-- 						<uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'username')"
+							sortable @sort-change="sortChange($event, 'username')">用户名</uni-th> -->
 						<uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'nickname')"
 							sortable @sort-change="sortChange($event, 'nickname')">用户昵称</uni-th>
 						<uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'mobile')"
 							sortable @sort-change="sortChange($event, 'mobile')">手机号码</uni-th>
-						<uni-th align="center" filter-type="select" :filter-data="options.filterData.status_localdata"
+<!-- 						<uni-th align="center" filter-type="select" :filter-data="options.filterData.status_localdata"
 							@filter-change="filterChange($event, 'status')">用户状态</uni-th>
 						<uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'email')"
-							sortable @sort-change="sortChange($event, 'email')">邮箱</uni-th>
+							sortable @sort-change="sortChange($event, 'email')">邮箱</uni-th> -->
 						<uni-th align="center">角色</uni-th>
 						<uni-th align="center" filter-type="select" :filter-data="tagsData"
 							@filter-change="filterChange($event, 'tags')">用户标签</uni-th>
-						<uni-th align="center">可登录应用</uni-th>
+<!-- 						<uni-th align="center">可登录应用</uni-th> -->
 						<uni-th align="center" filter-type="timestamp"
 							@filter-change="filterChange($event, 'last_login_date')" sortable
 							@sort-change="sortChange($event, 'last_login_date')">最后登录时间</uni-th>
 						<uni-th align="center">操作</uni-th>
 					</uni-tr>
 					<uni-tr v-for="(item,index) in data" :key="index">
-						<uni-td align="center">{{item.username}}</uni-td>
+	<!-- 					<uni-td align="center">{{item.username}}</uni-td> -->
 						<uni-td align="center">{{item.nickname}}</uni-td>
 						<uni-td align="center">{{item.mobile}}</uni-td>
-						<uni-td align="center">{{options.status_valuetotext[item.status]}}</uni-td>
+<!-- 						<uni-td align="center">{{options.status_valuetotext[item.status]}}</uni-td>
 						<uni-td align="center">
 							<uni-link :href="'mailto:' + item.email" :text="item.email"></uni-link>
-						</uni-td>
+						</uni-td> -->
 						<uni-td align="center"> {{ item.role }}</uni-td>
 						<uni-td align="center">
 							<block v-for="(tag,tagIndex) in item.tags" :key="tagIndex">
 								<uni-tag type="primary" inverted size="small" :text="tag" v-if="item.tags" style="margin: 0 5px;"></uni-tag>
 							</block>
 						</uni-td>
-						<uni-td align="center">
+<!-- 						<uni-td align="center">
 							<uni-link v-if="item.dcloud_appid === undefined" :href="noAppidWhatShouldIDoLink">
 								未绑定可登录应用<view class="uni-icons-help"></view>
 							</uni-link>
 							{{ item.dcloud_appid }}
-						</uni-td>
+						</uni-td> -->
 						<uni-td align="center">
 							<uni-dateformat :threshold="[0, 0]" :date="item.last_login_date"></uni-dateformat>
 						</uni-td>
@@ -120,7 +120,7 @@
 	const db = uniCloud.database()
 	// 表查询配置
 	const dbOrderBy = 'last_login_date desc' // 排序字段
-	const dbSearchFields = ['username', 'role.role_name', 'mobile', 'email'] // 支持模糊搜索的字段列表
+	const dbSearchFields = ['nickname', 'role.role_name', 'mobile'] // 支持模糊搜索的字段列表
 	// 分页配置
 	const pageSize = 20
 	const pageCurrent = 1
