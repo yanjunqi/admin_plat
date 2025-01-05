@@ -17,9 +17,9 @@
 			"title":"日期"
 		},
 		"sponsor":{
-			"title":"订餐人",
+			"title":"部门",
 			"bsonType": "string",
-			"description": "订餐发起人",
+			"description": "订餐部门",
 			"trim": "both"
 			
 		},
