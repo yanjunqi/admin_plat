@@ -8,8 +8,8 @@ const validator = {
         "format": "string"
       }
     ],
-    "title": "订餐人",
-    "label": "订餐人"
+    "title": "部门",
+    "label": "部门"
   },
   "mobile": {
     "rules": [

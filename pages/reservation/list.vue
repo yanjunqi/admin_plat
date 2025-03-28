@@ -21,7 +21,7 @@
         v-slot:default="{data,pagination,loading,error,options}" :options="options" loadtime="manual" @load="onqueryload">
         <uni-table ref="table" :loading="loading" :emptyText="error.message || '没有更多数据'" border stripe type="selection" @selection-change="selectionChange">
           <uni-tr>
-            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'sponsor')" sortable @sort-change="sortChange($event, 'sponsor')">订餐人</uni-th>
+            <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'sponsor')" sortable @sort-change="sortChange($event, 'sponsor')">部门</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'mobile')" sortable @sort-change="sortChange($event, 'mobile')">手机号码</uni-th>
             <uni-th align="center" filter-type="search" @filter-change="filterChange($event, 'orderers_noon')" sortable @sort-change="sortChange($event, 'orderers_noon')">午餐组员</uni-th>
             <uni-th align="center" filter-type="range" @filter-change="filterChange($event, 'ordererNum_noon')" sortable @sort-change="sortChange($event, 'ordererNum_noon')">午餐订餐数</uni-th>
@@ -91,7 +91,7 @@
           "filename": "reservation.xls",
           "type": "xls",
           "fields": {
-            "订餐人": "sponsor",
+            "部门": "sponsor",
             "手机号码": "mobile",
             "午餐组员": "orderers_noon",
             "午餐订餐数": "ordererNum_noon",

@@ -6,8 +6,8 @@
         </uni-forms-item>
     </uni-forms>
     <uni-forms ref="form" :model="formData" validateTrigger="bind">
-      <uni-forms-item name="sponsor" label="订餐人">
-        <uni-easyinput placeholder="订餐发起人" v-model="formData.sponsor" trim="both"></uni-easyinput>
+      <uni-forms-item name="sponsor" label="部门">
+        <uni-easyinput placeholder="订餐部门" v-model="formData.sponsor" trim="both"></uni-easyinput>
       </uni-forms-item>
       <uni-forms-item name="mobile" label="手机号码">
         <uni-easyinput placeholder="手机号码" v-model="formData.mobile" trim="both"></uni-easyinput>
