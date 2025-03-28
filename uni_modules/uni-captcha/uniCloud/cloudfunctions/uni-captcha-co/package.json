@@ -7,8 +7,8 @@
     "extensions": {
         "uni-cloud-jql": {}
     },
-    "origin-plugin-dev-name": "uni-starter",
-    "origin-plugin-version": "2.2.0",
-    "plugin-dev-name": "uni-starter",
-    "plugin-version": "2.2.0"
+    "origin-plugin-dev-name": "uni-captcha",
+    "origin-plugin-version": "0.7.5",
+    "plugin-dev-name": "uni-captcha",
+    "plugin-version": "0.7.5"
 }
